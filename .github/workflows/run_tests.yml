@@ -18,10 +18,6 @@ jobs:
       run: |
         pip install -r requirements.txt
 
-    - name: Run Unit Tests
+    - name: Run all Tests
       run: |
-        py -m django test todo.tests.unit_tests
-
-    - name: Run Integration Tests
-      run: |
-        py -m django test todo.tests.integration_tests
+        python .\manage.py test todo.tests
