@@ -16,7 +16,7 @@ class TodoItem(models.Model):
     tags = models.CharField(
         max_length=1000,
         blank=True
-    )  # Using CharField to store comma-separated tags
+    )  # Using CharField comma-separated tags
     status = models.CharField(
         max_length=10,
         choices=STATUS_CHOICES,
@@ -28,7 +28,6 @@ class TodoItem(models.Model):
 
     def save(self, *args, **kwargs):
         if self.tags:
-            # Splitting the tags by comma, making them unique, and joining back
             unique_tags = list(
                 set(
                     [tag.strip() for tag in self.tags.split(",")]
