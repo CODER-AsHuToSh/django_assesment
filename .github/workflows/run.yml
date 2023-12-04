@@ -17,14 +17,14 @@ jobs:
       - name: Install dependencies
         run: |
           pip install -r requirements.txt
+      
+      - name: Run Black Formatter (Check)
+        run: |
+          black .
 
       - name: Run Flake8 Linter
         run: |
           flake8 .
-
-      - name: Run Black Formatter (Check)
-        run: |
-          black --check .
 
   test:
     name: Run Tests
