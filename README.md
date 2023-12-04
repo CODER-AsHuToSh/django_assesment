@@ -54,9 +54,9 @@ Before running this project, ensure you have the following installed:
 2. Access the API endpoints:
 
    - To create a To-Do item: `POST /create/`
-   - To retrieve all To-Do items: `GET /api/todo/`
+   - To retrieve all To-Do items: `GET /all/`
    - To retrieve a specific To-Do item: `GET /<id>/`
-   - To update a To-Do item: `PUT update/<id>/`
+   - To update a To-Do item: `PUT /update/<id>/`
    - To delete a To-Do item: `DELETE /delete/<id>/`
 
 
