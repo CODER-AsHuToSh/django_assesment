@@ -1,0 +1,46 @@
+name: Linting and Tests
+
+on: [push, pull_request]
+
+jobs:
+  lint:
+    name: Run Linting
+    runs-on: windows-latest  
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.12.0' 
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Run Flake8 Linter
+        run: |
+          flake8 .
+
+      - name: Run Black Formatter (Check)
+        run: |
+          black --check .
+
+  test:
+    name: Run Tests
+    runs-on: windows-latest  
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.12.0'  
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Run all Tests
+        run: |
+          python .\manage.py test todo.tests

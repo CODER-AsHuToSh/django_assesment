@@ -14,9 +14,14 @@ class TodoItem(models.Model):
     description = models.CharField(max_length=1000)
     due_date = models.DateField(blank=True, null=True)
     tags = models.CharField(
-        max_length=1000, blank=True
+        max_length=1000,
+        blank=True
     )  # Using CharField to store comma-separated tags
-    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default="OPEN")
+    status = models.CharField(
+        max_length=10,
+        choices=STATUS_CHOICES,
+        default="OPEN"
+    )
 
     def __str__(self):
         return self.title
@@ -24,6 +29,11 @@ class TodoItem(models.Model):
     def save(self, *args, **kwargs):
         if self.tags:
             # Splitting the tags by comma, making them unique, and joining back
-            unique_tags = list(set([tag.strip() for tag in self.tags.split(",")]))
+            unique_tags = list(
+                set(
+                    [tag.strip() for tag in self.tags.split(",")]
+                )
+
+            )
             self.tags = ",".join(unique_tags)
         super().save(*args, **kwargs)

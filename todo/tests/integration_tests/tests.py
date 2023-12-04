@@ -9,7 +9,9 @@ class TodoItemIntegrationTests(TestCase):
     def setUp(self):
         self.client = APIClient()
         self.todo_item = TodoItem.objects.create(
-            title="Test Item", description="Test Description", status="OPEN"
+            title="Test Item",
+            description="Test Description",
+            status="OPEN"
         )
 
     def test_home_page(self):
@@ -23,9 +25,7 @@ class TodoItemIntegrationTests(TestCase):
             "status": "OPEN",
         }
         response = self.client.post(reverse("todo-create"), data)
-        self.assertEqual(
-            response.status_code, 201
-        )  # Assuming successful creation returns 201
+        self.assertEqual(response.status_code, 201)
 
     def test_retrieve_todo_item(self):
         response = self.client.get(
@@ -38,7 +38,6 @@ class TodoItemIntegrationTests(TestCase):
     def test_list_all_todo_items(self):
         response = self.client.get(reverse("todo-list-all"))
         self.assertEqual(response.status_code, 200)
-        # Add assertions to check if all items are present in the response
 
     def test_update_todo_item(self):
         update_data = {
@@ -46,17 +45,11 @@ class TodoItemIntegrationTests(TestCase):
             "description": "Updated Test Description",
             "status": "DONE",
         }
-        response = self.client.put(
-            reverse("todo-update", kwargs={"pk": self.todo_item.pk}), update_data
-        )
+        update_url = reverse("todo-update", kwargs={"pk": self.todo_item.pk})
+        response = self.client.put(update_url, update_data)
         self.assertEqual(response.status_code, 200)
-        # Add assertions to check if the item was updated correctly
 
     def test_delete_todo_item(self):
-        response = self.client.delete(
-            reverse("todo-delete", kwargs={"pk": self.todo_item.pk})
-        )
-        self.assertEqual(
-            response.status_code, 204
-        )  # Assuming successful deletion returns 204
-        # Add assertions to check if the item was deleted correctly
+        delete_url = reverse("todo-delete", kwargs={"pk": self.todo_item.pk})
+        response = self.client.delete(delete_url)
+        self.assertEqual(response.status_code, 204)
