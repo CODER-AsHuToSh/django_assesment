@@ -1,10 +1,11 @@
 from django.contrib import admin
-from .models import TodoItem
-from django.core.exceptions import ValidationError  # Import ValidationError
-
+from .models import TodoItem, Tag
+from django.core.exceptions import ValidationError
 
 class TodoItemAdmin(admin.ModelAdmin):
-    readonly_fields = ("timestamp",)  # Make timestamp field readonly
+    readonly_fields = ("timestamp",)
+    list_display = ("title", "due_date", "status")
+    list_filter = ("status", "due_date")  # Add filters for status and due_date
 
     def clean(self, request, obj=None):
         if obj is not None and obj.timestamp is not None:
@@ -22,9 +23,8 @@ class TodoItemAdmin(admin.ModelAdmin):
 
 
 class TagAdmin(admin.ModelAdmin):
-    # Define fieldsets if needed for Tag model
-    pass
+    list_display = ("name",)  # Display tag names in the admin list view
 
 
 admin.site.register(TodoItem, TodoItemAdmin)
-# admin.site.register(Tag, TagAdmin)
+admin.site.register(Tag, TagAdmin)

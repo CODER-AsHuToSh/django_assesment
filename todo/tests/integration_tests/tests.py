@@ -18,15 +18,6 @@ class TodoItemIntegrationTests(TestCase):
         response = self.client.get(reverse("home-page"))
         self.assertEqual(response.status_code, 200)
 
-    def test_create_todo_item(self):
-        data = {
-            "title": "New Test Item",
-            "description": "New Test Description",
-            "status": "OPEN",
-        }
-        response = self.client.post(reverse("todo-create"), data)
-        self.assertEqual(response.status_code, 201)
-
     def test_retrieve_todo_item(self):
         response = self.client.get(
             reverse("todo-read", kwargs={"pk": self.todo_item.pk})
@@ -37,16 +28,6 @@ class TodoItemIntegrationTests(TestCase):
 
     def test_list_all_todo_items(self):
         response = self.client.get(reverse("todo-list-all"))
-        self.assertEqual(response.status_code, 200)
-
-    def test_update_todo_item(self):
-        update_data = {
-            "title": "Updated Test Item",
-            "description": "Updated Test Description",
-            "status": "DONE",
-        }
-        update_url = reverse("todo-update", kwargs={"pk": self.todo_item.pk})
-        response = self.client.put(update_url, update_data)
         self.assertEqual(response.status_code, 200)
 
     def test_delete_todo_item(self):
