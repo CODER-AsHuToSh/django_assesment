@@ -79,10 +79,10 @@ Before running this project, ensure you have the following installed:
         "due_date": "2023-12-31",
         "status": "WORKING"
        }
-       ```
+   ```
    
    - A POST Request
-      ```json
+   ```json
        {
          "title": "New Todo Item",
          "description": "Description for the new todo",
@@ -94,7 +94,7 @@ Before running this project, ensure you have the following installed:
             {"name": "TagG23AA1W1dd22"}
             ]
         }
-      ```
+   ```
 ## Coverage Report
 
 ![Coverage Report Screenshot](ss.png)
