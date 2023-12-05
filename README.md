@@ -62,6 +62,7 @@ Before running this project, ensure you have the following installed:
 
 ## Examples 
    - Results of GET Request
+   ```json
        {
         "id": 23,
         "tags": [
@@ -78,8 +79,10 @@ Before running this project, ensure you have the following installed:
         "due_date": "2023-12-31",
         "status": "WORKING"
        }
+       ```
    
    - A POST Request
+      ```json
        {
          "title": "New Todo Item",
          "description": "Description for the new todo",
@@ -91,10 +94,10 @@ Before running this project, ensure you have the following installed:
             {"name": "TagG23AA1W1dd22"}
             ]
         }
-
+      ```
 ## Coverage Report
 
-![Coverage Report Screenshot](https://drive.google.com/file/d/18qEmHrhcZ5BsQPiaeuFkzXtq6d1Cy4fB/view?usp=drive_link)
+![Coverage Report Screenshot](ss.png)
 
 
 ## Contact
