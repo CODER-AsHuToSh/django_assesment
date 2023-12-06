@@ -7,11 +7,6 @@ class TodoItemAdmin(admin.ModelAdmin):
     list_display = ("title", "due_date", "status")
     list_filter = ("status", "due_date")  # Add filters for status and due_date
 
-    def clean(self, request, obj=None):
-        if obj is not None and obj.timestamp is not None:
-            raise ValidationError("You cannot edit the timestamp.")
-        return super().clean(request, obj)
-
     fieldsets = (
         ("Details", {
             "fields": ("title", "description", "due_date", "status")

@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from rest_framework.exceptions import NotFound
 from todo.models import TodoItem, Tag
 
 
@@ -31,3 +32,17 @@ class TodoItemSerializer(serializers.ModelSerializer):
             todo_item.tags.add(tag)
 
         return todo_item
+    
+    def update(self, instance, validated_data):
+        tags_data = validated_data.pop('tags', None)
+        
+        if tags_data is not None:
+            tags_serializer = self.fields['tags']
+            # Loop through each tag data
+            for tag_data in tags_data:
+                tag_name = tag_data.get('name')
+                if tag_name:
+                    tag, _ = Tag.objects.get_or_create(name=tag_name)
+                    instance.tags.add(tag)
+
+        return super().update(instance, validated_data)
