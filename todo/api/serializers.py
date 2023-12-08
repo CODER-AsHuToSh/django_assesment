@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from rest_framework.exceptions import NotFound
 from todo.models import TodoItem, Tag
-
+from django.utils import timezone
 
 class TagSerializer(serializers.ModelSerializer):
     class Meta:
@@ -14,6 +14,11 @@ class TodoItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = TodoItem
         fields = "__all__"
+
+    def validate_due_date(self, value):
+        if value and value < timezone.now().date():
+            raise serializers.ValidationError("Due date cannot be in the past.")
+        return value
 
     def create(self, validated_data):
         tags_data = validated_data.pop('tags')  # Remove tags from validated data
