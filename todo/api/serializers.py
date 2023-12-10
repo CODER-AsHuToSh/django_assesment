@@ -3,16 +3,18 @@ from rest_framework.exceptions import NotFound
 from todo.models import TodoItem, Tag
 from django.utils import timezone
 
+# Serializers.py separates logic for data serialization in Django REST Framework for improved code organization and readability.
+
 class TagSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Tag
+        model = Tag   # Defines the model that to be serialized.
         fields = ('name',)
 
 class TodoItemSerializer(serializers.ModelSerializer):
     tags = TagSerializer(many=True)
 
     class Meta:
-        model = TodoItem
+        model = TodoItem  # Defines the model that to be serialized.
         fields = "__all__"
 
     def validate_due_date(self, value):
@@ -51,3 +53,5 @@ class TodoItemSerializer(serializers.ModelSerializer):
                     instance.tags.add(tag)
 
         return super().update(instance, validated_data)
+
+# Using super().update(), you're extending or overriding the default behavior of the update method defined in the parent class while still maintaining its core functionality.

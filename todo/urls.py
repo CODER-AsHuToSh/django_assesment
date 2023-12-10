@@ -8,6 +8,8 @@ from .api.views import (
     Home,
 )
 
+# Defining a name for a URL pattern allows you to refer to that URL elsewhere in your codebase, especially in templates or when generating URLs dynamically in views.
+
 urlpatterns = [
     path("", Home, name="home-page"),
     path("create/", TodoItemCreateView.as_view(), name="todo-create"),
